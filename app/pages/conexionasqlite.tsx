@@ -2,7 +2,6 @@
 
 import * as SQlite from 'expo-sqlite';
  const db = SQlite.openDatabaseSync('Pr-db'); // Open the database synchronously
-undefined
 
 export async function read(): Promise<{
     id: number;

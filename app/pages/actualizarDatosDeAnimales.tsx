@@ -7,11 +7,11 @@ import { useLocalSearchParams, useRouter } from 'expo-router'; // Cambia a useLo
 export default function EditAnimalScreen() {
     const { id } = useLocalSearchParams(); // Obtén el parámetro 'id' de la URL
     const router = useRouter(); // Para manejar la navegación
-    const [animal, setAnimal] = useState<any>({});
+    const [animal, setAnimal] = useState<any>({}); //  useSate para almacenar los valores de forma temporal para el registro 
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        async function fetchAnimal() {
+        async function fetchAnimal() { // se utiliza async por que se maneja funciones asincronas lo que require promesas
             try {
                 const animals = await read();
                 const selectedAnimal = animals.find((a) => a.id === parseInt(id as string, 10));
@@ -112,7 +112,7 @@ export default function EditAnimalScreen() {
                 onChangeText={(text) => setAnimal({ ...animal, destinado_para: text })}
                 style={{ borderWidth: 1, marginBottom: 10, padding: 5 }}
             />
-            <Button title="Actualizar" onPress={handleUpdate} />
+            <Button title="Actualizar" onPress={handleUpdate} /> 
         </ScrollView>
     );
 }

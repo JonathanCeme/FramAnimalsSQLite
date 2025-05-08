@@ -1,3 +1,5 @@
+
+
 // maneja el formulario para añadir animales a la base de datos
 
 import * as SQlite from 'expo-sqlite';
@@ -8,7 +10,7 @@ import { Link } from 'expo-router'; // Importa Link de expo-router
 const db = SQlite.openDatabaseSync('Pr-db'); // Open the database synchronously
 
 export function HandleTableAnimals() {
-    const [name, setName] = useState<string>(''); // State for the animal name
+    const [name, setName] = useState<string>(''); // useState  para almacenar temporariamente el nombre del animal
     const [tipo, setTipo] = useState<string>(''); // State for the animal type
     const [raza, setRaza] = useState<string>(''); // State for the animal breed
     const [sexo, setSexo] = useState<string>(''); // State for the animal gender
@@ -20,10 +22,10 @@ export function HandleTableAnimals() {
     const [destinadoPara, setDestinadoPara] = useState<string>(''); // State for purpose
 
     async function handleAddAnimal() {
-        if (name && tipo && raza && sexo && fechaNacimiento && pesoActualKg && estadoSalud && ubicacion && fechaIngreso && destinadoPara) {
+        if (name && tipo && raza && sexo && fechaNacimiento && pesoActualKg && estadoSalud && ubicacion && fechaIngreso && destinadoPara) { // Verifica que todos los campos estén llenos
             await db.runAsync(
                 `INSERT INTO animals (name, tipo, raza, sexo, fecha_nacimiento, peso_actual_kg, estado_salud, ubicacion, fecha_ingreso, destinado_para) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-                [name, tipo, raza, sexo, fechaNacimiento, parseFloat(pesoActualKg), estadoSalud, ubicacion, fechaIngreso, destinadoPara]
+                [name, tipo, raza, sexo, fechaNacimiento, parseFloat(pesoActualKg), estadoSalud, ubicacion, fechaIngreso, destinadoPara] // parseFloat convierte el peso a un número
             );
             setName('');
             setTipo('');
@@ -55,7 +57,7 @@ export function HandleTableAnimals() {
                 <TextInput style={styles.input} placeholder="Ubicación" value={ubicacion} onChangeText={setUbicacion} />
                 <TextInput style={styles.input} placeholder="Fecha de Ingreso" value={fechaIngreso} onChangeText={setFechaIngreso} />
                 <TextInput style={styles.input} placeholder="Destinado Para" value={destinadoPara} onChangeText={setDestinadoPara} />
-                <Pressable style={styles.button} onPress={handleAddAnimal}>
+                <Pressable style={styles.button} onPress={handleAddAnimal}> 
                     <Text style={styles.textbutton}>AÑADIR</Text>
                 </Pressable>
             </View>

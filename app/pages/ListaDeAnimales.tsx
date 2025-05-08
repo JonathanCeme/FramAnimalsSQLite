@@ -1,7 +1,7 @@
 
 // muestra la lista de animales y los botones de editar y eliminar
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, Pressable, Alert, Button } from 'react-native';
 import { read, deleteAnimalById } from './conexionasqlite'; // Asegúrate de que la ruta sea correcta
 import { useRouter } from 'expo-router';
@@ -27,8 +27,7 @@ export default function AnimalList() {
         const rows = await read();
         setData(rows);
     }
-
-    useFocusEffect(
+    useFocusEffect( // se utiliza para ejecutar la función cada vez que la pantalla gana el foco
         React.useCallback(() => {
             fetchData(); // Llama a fetchData cada vez que la pantalla gana el foco
         }, [])
